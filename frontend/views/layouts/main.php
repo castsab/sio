@@ -22,6 +22,9 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+
+<input type="hidden" id="baseUrl" value="<?php echo Yii::$app->request->baseUrl;?>">
+
 <body>
 <?php $this->beginBody() ?>
 

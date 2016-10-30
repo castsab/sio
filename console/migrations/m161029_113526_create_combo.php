@@ -1,0 +1,21 @@
+<?php
+
+use yii\db\Migration;
+use yii\db\Schema;
+
+class m161029_113526_create_combo extends Migration
+{
+    public function safeUp()
+    {
+        $this->createTable('combo', ['id'=>Schema::TYPE_INTEGER,
+                                     'name'=>Schema::TYPE_STRING.'(50) not null',
+                                     'description'=>Schema::TYPE_STRING.'(100)',
+                                     'state'=>Schema::TYPE_INTEGER.'(2) not null default 1']);
+        $this->addPrimaryKey('pk_combo_id', 'combo', 'id');
+    }
+
+    public function safeDown()
+    {
+        $this->dropTable('combo');
+    }
+}

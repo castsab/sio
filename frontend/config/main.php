@@ -54,7 +54,10 @@ return [
     'modules' => [
         'admin' => [
             'class' => 'frontend\modules\admin\Module'
-        ]
+        ],
+        'setting' => [
+            'class' => 'frontend\modules\setting\Setting',
+        ],
     ],
     
     'params' => $params,
