@@ -3,18 +3,16 @@
 namespace frontend\modules\setting\controllers;
 
 use Yii;
-use backend\models\Combo;
-use backend\models\ComboSearch;
+use backend\models\Service;
+use backend\models\ServiceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-use backend\models\OptionSearch;
-
 /**
- * ComboController implements the CRUD actions for Combo model.
+ * ServiceController implements the CRUD actions for Service model.
  */
-class ComboController extends Controller
+class ServiceController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class ComboController extends Controller
     }
 
     /**
-     * Lists all Combo models.
+     * Lists all Service models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ComboSearch();
+        $searchModel = new ServiceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,30 +45,25 @@ class ComboController extends Controller
     }
 
     /**
-     * Displays a single Combo model.
+     * Displays a single Service model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $modelSearchOption = new OptionSearch();
-        $dataSearchOption = $modelSearchOption->search(Yii::$app->request->queryParams,$id);
-        
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'modelSearchOption' => $modelSearchOption,
-            'dataSearchOption' => $dataSearchOption
         ]);
     }
 
     /**
-     * Creates a new Combo model.
+     * Creates a new Service model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Combo();
+        $model = new Service();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -82,7 +75,7 @@ class ComboController extends Controller
     }
 
     /**
-     * Updates an existing Combo model.
+     * Updates an existing Service model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -101,7 +94,7 @@ class ComboController extends Controller
     }
 
     /**
-     * Deletes an existing Combo model.
+     * Deletes an existing Service model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,15 +107,15 @@ class ComboController extends Controller
     }
 
     /**
-     * Finds the Combo model based on its primary key value.
+     * Finds the Service model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Combo the loaded model
+     * @return Service the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Combo::findOne($id)) !== null) {
+        if (($model = Service::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

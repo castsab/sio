@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]);
         ?>
     </p>
+    
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'id'=>'gridWiewOption',
@@ -83,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-</div>
+
 
 
 

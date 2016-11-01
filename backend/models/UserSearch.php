@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Option;
+use backend\models\User;
 
 /**
- * OptionSearch represents the model behind the search form of `backend\models\Option`.
+ * UserSearch represents the model behind the search form of `backend\models\User`.
  */
-class OptionSearch extends Option
+class UserSearch extends User
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class OptionSearch extends Option
     public function rules()
     {
         return [
-            [['id', 'id_combo', 'code', 'order', 'state'], 'integer'],
-            [['name', 'description'], 'safe'],
+            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'first_name', 'last_name'], 'safe'],
         ];
     }
 
@@ -39,9 +39,9 @@ class OptionSearch extends Option
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$id=null)
+    public function search($params)
     {
-        $query = Option::find();
+        $query = User::find();
 
         // add conditions that should always apply here
 
@@ -60,18 +60,19 @@ class OptionSearch extends Option
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_combo' => $this->id_combo,
-            'code' => $this->code,
-            'order' => $this->order,
-            'state' => $this->state,
+            'status' => $this->status,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-              ->andFilterWhere(['like', 'description', $this->description]);
-        
-        if($id != null)
-            $query->andFilterWhere(['id_combo'=>$id]);
-        
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
+            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'first_name', $this->first_name])
+            ->andFilterWhere(['like', 'last_name', $this->last_name]);
+
         return $dataProvider;
     }
 }

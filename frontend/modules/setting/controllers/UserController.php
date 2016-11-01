@@ -3,18 +3,16 @@
 namespace frontend\modules\setting\controllers;
 
 use Yii;
-use backend\models\Combo;
-use backend\models\ComboSearch;
+use backend\models\User;
+use backend\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-use backend\models\OptionSearch;
-
 /**
- * ComboController implements the CRUD actions for Combo model.
+ * UserController implements the CRUD actions for User model.
  */
-class ComboController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritdoc
@@ -32,12 +30,12 @@ class ComboController extends Controller
     }
 
     /**
-     * Lists all Combo models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ComboSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,30 +45,25 @@ class ComboController extends Controller
     }
 
     /**
-     * Displays a single Combo model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $modelSearchOption = new OptionSearch();
-        $dataSearchOption = $modelSearchOption->search(Yii::$app->request->queryParams,$id);
-        
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'modelSearchOption' => $modelSearchOption,
-            'dataSearchOption' => $dataSearchOption
         ]);
     }
 
     /**
-     * Creates a new Combo model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Combo();
+        $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -82,7 +75,7 @@ class ComboController extends Controller
     }
 
     /**
-     * Updates an existing Combo model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -101,7 +94,7 @@ class ComboController extends Controller
     }
 
     /**
-     * Deletes an existing Combo model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -114,15 +107,15 @@ class ComboController extends Controller
     }
 
     /**
-     * Finds the Combo model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Combo the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Combo::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

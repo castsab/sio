@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Option;
+use backend\models\Service;
 
 /**
- * OptionSearch represents the model behind the search form of `backend\models\Option`.
+ * ServiceSearch represents the model behind the search form of `backend\models\Service`.
  */
-class OptionSearch extends Option
+class ServiceSearch extends Service
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class OptionSearch extends Option
     public function rules()
     {
         return [
-            [['id', 'id_combo', 'code', 'order', 'state'], 'integer'],
+            [['id', 'id_user', 'status', 'created_at', 'updated_at', 'id_line_business'], 'integer'],
             [['name', 'description'], 'safe'],
         ];
     }
@@ -39,9 +39,9 @@ class OptionSearch extends Option
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$id=null)
+    public function search($params)
     {
-        $query = Option::find();
+        $query = Service::find();
 
         // add conditions that should always apply here
 
@@ -60,18 +60,16 @@ class OptionSearch extends Option
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_combo' => $this->id_combo,
-            'code' => $this->code,
-            'order' => $this->order,
-            'state' => $this->state,
+            'id_user' => $this->id_user,
+            'status' => $this->status,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'id_line_business' => $this->id_line_business,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-              ->andFilterWhere(['like', 'description', $this->description]);
-        
-        if($id != null)
-            $query->andFilterWhere(['id_combo'=>$id]);
-        
+            ->andFilterWhere(['like', 'description', $this->description]);
+
         return $dataProvider;
     }
 }

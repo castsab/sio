@@ -8,6 +8,7 @@ use backend\models\Option;
 class OptionComboForm extends Model
 {
     const REGISTRY_STATUS = 1;
+    const LINE_BUSINESS = 2;
     
     public static function getArrayOptionsCombo($codeCombo, $arrayIndexNotShowOption=''){
         $option = new Option();
