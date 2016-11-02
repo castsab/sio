@@ -17,7 +17,7 @@ class m161031_212428_populate_service extends Migration
     }
 
     public function safeDown(){
-        $this->execute('DELETE FROM combo where id=2');
-        $this->execute('DELETE FROM option where id_combo=2');
+        $this->execute('DELETE FROM `option` where `id_combo`=2');
+        $this->execute('DELETE FROM `combo` where `id`=2');
     }
 }

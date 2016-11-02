@@ -4,37 +4,40 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
-use frontend\assets\OptionAsset;
-OptionAsset::register($this);
+use frontend\assets\ClientContactAsset;
+ClientContactAsset::register($this);
 
-$this->title = Yii::t('app', 'Options');
+$this->title = Yii::t('app', 'Client Contacts');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<div class="option-index">
+<div class="client-contact-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php
-        echo Html::button(Yii::t('app', 'Create Option'), [
-            'class' => 'btn btn-success btnOpenModal',
-            'id_combo' => $id_combo,
-            'value' => yii\helpers\Url::toRoute(['option/create'])
-        ]);
+        <?= Html::button(Yii::t('app', 'Create Client Contact'), [
+                'class' => 'btn btn-success btnOpenModal',
+                'document' => $document,
+                'value' => yii\helpers\Url::toRoute(['client-contact/create'])
+            ]); 
         ?>
     </p>
-    
-    
+
+   
     <?= GridView::widget([
-        'id'=>'gridWiewOption',
+        'id'=>'gridWiewClientContact',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
-            'id_combo',
-            'code',
-            'name',
+            'id',
+            'document',
+            'id_user',
+            'first_name',
+            'last_name',
             
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -44,15 +47,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::button('<span class="glyphicon glyphicon-eye-open"></span> '.Yii::t('app','View'),
                         [
                             'class'=>'btn btn-xs btnOpenModal',
-                            'value' => yii\helpers\Url::to(['option/view', 'id'=>$model->id]),
+                            'value' => yii\helpers\Url::to(['client-contact/view', 'id'=>$model->id]),
                         ]);
                     },
                     'update' => function ($url, $model) {
                         return Html::button('<span class="glyphicon glyphicon-pencil"></span> '.Yii::t('app','Update'),
                         [
                             'class'=>'btn btn-xs btnOpenModal',
-                            'id_combo' => $model->id_combo,
-                            'value' => yii\helpers\Url::to(['option/update', 'id'=>$model->id]),
+                            'document' => $model->document,
+                            'value' => yii\helpers\Url::to(['client-contact/update', 'id'=>$model->id]),
                         ]);
                     },
                     'delete' => function ($url, $model) {
@@ -60,14 +63,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'class'=>'btn btn-xs btnActionDelete',
                             'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                            'value' => yii\helpers\Url::to(['option/delete', 'id'=>$model->id]),
+                            'value' => yii\helpers\Url::to(['client-contact/delete', 'id'=>$model->id]),
                         ]);
                     }
                 ],
             ],
         ],
-    ]);
-    ?>
+    ]); ?>
     
 </div>
 
@@ -83,8 +85,3 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
-
-
-
-
-

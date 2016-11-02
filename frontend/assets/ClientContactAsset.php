@@ -7,7 +7,7 @@ use yii\web\AssetBundle;
 /**
  * Main frontend application asset bundle.
  */
-class ServiceAsset extends AssetBundle
+class ClientContactAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
@@ -15,7 +15,7 @@ class ServiceAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
-        'js/service.js'
+        'js/client_contact.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

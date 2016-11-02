@@ -25,8 +25,12 @@ function actionAjaxSubmitForm($form,idGridWiew) {
                 $('#myModal').modal('hide');
                 $("#"+idGridWiew).yiiGridView("applyFilter");
             } else {
-                setAjaxErrors(result.message);
-                return false;
+                if(result.state == '2'){
+                    $("#message-contact").addClass('alert alert-info').html(result.message).show('slide');
+                }else{
+                    console.log("server error");
+                    $form.replaceWith('<button class="newType">Fail</button>').fadeOut()
+                }
             }
         },
         error: function() {

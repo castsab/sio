@@ -4,12 +4,16 @@ namespace frontend\models;
 use yii;
 use yii\base\Model;
 use backend\models\Option;
+use backend\models\Municipality;
 
 class OptionComboForm extends Model
 {
     const REGISTRY_STATUS = 1;
     const LINE_BUSINESS = 2;
-    
+    const TYPE_DOCUMENT = 3;
+    const TYPE_CLIENT = 4;
+
+
     public static function getArrayOptionsCombo($codeCombo, $arrayIndexNotShowOption=''){
         $option = new Option();
         $arrayOptions = $option->getListOptionCombo($codeCombo);
@@ -31,6 +35,10 @@ class OptionComboForm extends Model
             else
                 return yii::t("app","Not assigned");
         }
+    }
+    
+    public static function getArrayOptionsComboMunicipality(){
+        return Municipality::getListMunicipality();
     }
 
 }

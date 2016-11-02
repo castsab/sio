@@ -42,6 +42,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                
             ],
         ],
         
@@ -58,6 +59,11 @@ return [
         'setting' => [
             'class' => 'frontend\modules\setting\Setting',
         ],
+        
+         'client' => [
+            'class' => 'frontend\modules\client\Client',
+         ],
+
     ],
     
     'params' => $params,
