@@ -88,4 +88,15 @@ class User extends \yii\db\ActiveRecord
         }
         return $result;
     }
+    
+    public static function getFindByRole($id_user){
+        $query = new \yii\db\Query();
+        $query->select('*');
+        $query->from('user');
+        $query->leftJoin('auth_assignment', 'user.id=auth_assignment.user_id');
+        $query->where('user.id='.$id_user.'');
+        $result = $query->createCommand();
+        $arrayData = $result->queryAll();
+        return $arrayData[0]['item_name'];
+    }
 }

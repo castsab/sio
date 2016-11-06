@@ -13,7 +13,8 @@ class MenuForm {
     }
 
     public static function getMenuParent($parent){
-        $arrayOptionsMenu = Menu::find()->where(['parent' => $parent])->orderBy('order')->asArray()->all();
+        
+        $arrayOptionsMenu = Menu::find()->where(['parent' => $parent,'data'=>Yii::$app->controller->module->id])->orderBy('order')->asArray()->all();
         $arrayMenu = [];
         foreach ($arrayOptionsMenu as $optionsMenu) {
             if($parent==null){
