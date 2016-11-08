@@ -38,10 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
             
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template'=>'{view} {update} {delete}',
+                'template'=>'{view} {update} {delete} {print}',
                 'buttons'=>[
                     'view' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>',yii\helpers\Url::to(['quote/view', 'id'=>$model->id]));
+                        return Html::a('<span class="glyphicon glyphicon-briefcase"></span>',yii\helpers\Url::to(['quote/view', 'id'=>$model->id]));
                     },
                     'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>',null,
@@ -58,7 +58,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                             'value' => yii\helpers\Url::to(['quote/delete', 'id'=>$model->id]),
                         ]);
-                    }
+                    },
+                    'print' => function ($url, $model) {
+                        if(\backend\models\QuoteService::getNumberServices($model->id) != 0){
+                            return Html::a('<span class="glyphicon glyphicon-print"></span>',yii\helpers\Url::to(['quote/export-quote', 'id'=>$model->id]), 
+                            [
+                                'title' => Yii::t('app', 'Print quote'),
+                                'style' => 'cursor:pointer;',
+                                'target'=>'_blank',
+                            ]);
+                        }
+                    },
                 ],
             ],
         ],

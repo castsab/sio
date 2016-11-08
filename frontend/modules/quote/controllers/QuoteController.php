@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use backend\models\QuoteServiceSearch;
+use kartik\mpdf\Pdf;
+use mPDF;
 
 /**
  * QuoteController implements the CRUD actions for Quote model.
@@ -151,5 +153,30 @@ class QuoteController extends Controller
             else
                 return false;
         }
+    }
+    
+    public function actionExportQuote($id) {
+        $model = $this->findModel($id);
+        $time = time();
+        $header = $this->renderPartial('exportQuote/_headerQuote');
+        $footer = $this->renderPartial('exportQuote/_footerQuote');
+        $content = $this->renderPartial('exportQuote/_bodyQuote', ['model' => $model]);
+        $conditionsQuote = $this->renderPartial('exportQuote/_conditionsQuote', ['model' => $model]);
+
+        $mpdf = new mPDF('c', 'A4', '12', '', 10, 10, 48, 50, 16, 9);
+        $mpdf->SetDisplayMode('fullpage');
+        
+        $stylesheet = file_get_contents("../web/css/exportQuote.css");
+        $mpdf->WriteHTML($stylesheet, 1);
+
+        $mpdf->SetHTMLHeader($header);
+        $mpdf->setFooter($footer);
+        $mpdf->WriteHTML($content);
+        $mpdf->WriteHTML($conditionsQuote);
+
+        $name = 'XXX-' . $model->id .'-'.$time;
+        
+        echo $mpdf->Output($folder . $name . '.pdf', "I");
+        exit;
     }
 }

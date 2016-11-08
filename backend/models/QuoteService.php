@@ -69,4 +69,14 @@ class QuoteService extends \yii\db\ActiveRecord
         }
         return parent::beforeSave($insert);
     }
+    
+    public static function getNumberServices($id_quote){
+        $totalServices = 0;
+        $totalServices = self::find()->where(['id_quote'=>$id_quote])->count('*');
+        return $totalServices;
+    }
+    
+    public static function getListServices($id_quote){
+        return self::find()->select('*')->where(['quote_service.status'=>1,'id_quote'=>$id_quote])->innerJoin('service','service.id=quote_service.id_service')->asArray()->all();
+    }
 }

@@ -71,3 +71,7 @@ function setAjaxErrors(errors) {
     });
 }
 
+function redirectPage(url){
+    window.location.href = baseUrl+"/"+url;
+}
+

@@ -74,4 +74,5 @@ class Service extends \yii\db\ActiveRecord
         return \yii\helpers\ArrayHelper::map($array, 'id', 'name');
         
     }
+    
 }

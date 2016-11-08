@@ -24,7 +24,8 @@ function actionAjaxSubmitFormQuote($form,idGridWiew) {
             if (result.state == '1') {
                 console.log(result.model.id);
                 if (confirm("Se creó cotización #"+result.model.id+", deseha adicionar servicios?")){
-                    window.location = "view?id="+result.model.id;
+                    var url = "quote/quote/view?id="+result.model.id;
+                    redirectPage(url);
                 }else{
                     $('#myModal').modal('hide');
                     $("#"+idGridWiew).yiiGridView("applyFilter");
