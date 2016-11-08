@@ -5,25 +5,25 @@ namespace backend\models;
 use Yii;
 
 /**
- * This is the model class for table "service".
+ * This is the model class for table "quote_service".
  *
- * @property integer $id
+ * @property string $id
+ * @property string $id_quote
  * @property integer $id_user
- * @property integer $id_line_business
- * @property string $name
- * @property string $description
+ * @property integer $id_service
+ * @property integer $estimate_hours
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Service extends \yii\db\ActiveRecord
+class QuoteService extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'service';
+        return 'quote_service';
     }
 
     /**
@@ -32,10 +32,10 @@ class Service extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_line_business', 'name'], 'required'],
-            [['id', 'id_user', 'id_line_business', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['name'], 'string', 'max' => 50],
-            [['description'], 'string', 'max' => 100],
+            [['id_service', 'estimate_hours'], 'required'],
+            [['id_quote', 'id_user', 'id_service', 'estimate_hours', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['id_quote'], 'exist', 'skipOnError' => true, 'targetClass' => Quote::className(), 'targetAttribute' => ['id_quote' => 'id']],
+            [['id_service'], 'exist', 'skipOnError' => true, 'targetClass' => Service::className(), 'targetAttribute' => ['id_service' => 'id']],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
@@ -47,10 +47,10 @@ class Service extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'id_quote' => Yii::t('app', 'Id Quote'),
             'id_user' => Yii::t('app', 'Id User'),
-            'id_line_business' => Yii::t('app', 'Id Line Business'),
-            'name' => Yii::t('app', 'Name'),
-            'description' => Yii::t('app', 'Description'),
+            'id_service' => Yii::t('app', 'Id Service'),
+            'estimate_hours' => Yii::t('app', 'Estimate Hours'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -62,16 +62,11 @@ class Service extends \yii\db\ActiveRecord
         if ($insert) {
             $this->created_at=$time;
             $this->updated_at=$time;
+            $this->status=1;
             $this->id_user = Yii::$app->user->identity->id;
         } else {
             $this->updated_at=$time;
         }
         return parent::beforeSave($insert);
-    }
-    
-    public static function getListServices() {
-        $array = self::find()->select(['id','name'])->where(['status'=>1])->orderBy('name ASC')->all();
-        return \yii\helpers\ArrayHelper::map($array, 'id', 'name');
-        
     }
 }

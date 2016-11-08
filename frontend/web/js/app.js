@@ -29,13 +29,13 @@ function actionAjaxSubmitForm($form,idGridWiew) {
                     $("#message-contact").addClass('alert alert-info').html(result.message).show('slide');
                 }else{
                     console.log("server error");
-                    $form.replaceWith('<button class="newType">Fail</button>').fadeOut()
+                    $form.replaceWith('<button class="newType">Fail</button>').fadeOut();
                 }
             }
         },
         error: function() {
             console.log("server error");
-            $form.replaceWith('<button class="newType">Fail</button>').fadeOut()
+            $form.replaceWith('<button class="newType">Fail</button>').fadeOut();
         }
     });
 }

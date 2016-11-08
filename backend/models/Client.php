@@ -32,9 +32,8 @@ use Yii;
  */ 
 class Client extends \yii\db\ActiveRecord
 { 
-    /** 
-     * @inheritdoc 
-     */ 
+    public $fullname;
+    
     public static function tableName() 
     { 
         return 'client'; 
@@ -114,6 +113,13 @@ class Client extends \yii\db\ActiveRecord
                 }
             }    
         }
+    }
+    
+    public static function getClientArray(){
+        return \yii\helpers\ArrayHelper::map(self::find()->select([
+            "document", 
+            "CASE WHEN type_client = 1 THEN CONCAT(document,' - ',first_name,' ', last_name) ELSE CONCAT(document,' - ',name_company) END as fullname"
+        ])->where(['status'=>1])->all(), 'document', 'fullname');
     }
 } 
 

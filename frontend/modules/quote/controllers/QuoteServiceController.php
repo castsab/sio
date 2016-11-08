@@ -1,18 +1,18 @@
 <?php
 
-namespace frontend\modules\client\controllers;
+namespace frontend\modules\quote\controllers;
 
 use Yii;
-use backend\models\ClientContact;
-use backend\models\ClientContactSearch;
+use backend\models\QuoteService;
+use backend\models\QuoteServiceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ClientContactController implements the CRUD actions for ClientContact model.
+ * QuoteServiceController implements the CRUD actions for QuoteService model.
  */
-class ClientContactController extends Controller
+class QuoteServiceController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class ClientContactController extends Controller
     }
 
     /**
-     * Lists all ClientContact models.
+     * Lists all QuoteService models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ClientContactSearch();
+        $searchModel = new QuoteServiceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,36 +45,29 @@ class ClientContactController extends Controller
     }
 
     /**
-     * Displays a single ClientContact model.
-     * @param integer $id
+     * Displays a single QuoteService model.
+     * @param string $id
      * @return mixed
      */
     public function actionView($id)
     {
         return $this->renderAjax('view', [
-            'model' => $this->findModel($id)
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new ClientContact model.
+     * Creates a new QuoteService model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ClientContact();
+        $model = new QuoteService();
 
         if ($model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = 'json';
-            
-            if($this->validateIsEmptyNumberPhone($model) == 1){
-                $message = 'Debe diligenciar al menos un número de celular o local';
-                $state = '2';
-                return ['state' => $state,'message' => $message,'model'=>$model];
-            }else{
-                return \backend\controllers\BaseController::validateForm($model);
-            }
+            return \backend\controllers\BaseController::validateForm($model);
         } else {
             return $this->renderAjax('create', [
                 'model' => $model,
@@ -83,9 +76,9 @@ class ClientContactController extends Controller
     }
 
     /**
-     * Updates an existing ClientContact model.
+     * Updates an existing QuoteService model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -94,14 +87,7 @@ class ClientContactController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = 'json';
-            
-            if($this->validateIsEmptyNumberPhone($model) == 1){
-                $message = 'Debe diligenciar al menos un número telefónico celular o local';
-                $state = '2';
-                return ['state' => $state,'message' => $message,'model'=>$model];
-            }else{
-                return \backend\controllers\BaseController::validateForm($model);
-            }
+            return \backend\controllers\BaseController::validateForm($model);
         } else {
             return $this->renderAjax('update', [
                 'model' => $model,
@@ -110,9 +96,9 @@ class ClientContactController extends Controller
     }
 
     /**
-     * Deletes an existing ClientContact model.
+     * Deletes an existing QuoteService model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -123,27 +109,18 @@ class ClientContactController extends Controller
     }
 
     /**
-     * Finds the ClientContact model based on its primary key value.
+     * Finds the QuoteService model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return ClientContact the loaded model
+     * @param string $id
+     * @return QuoteService the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ClientContact::findOne($id)) !== null) {
+        if (($model = QuoteService::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-    
-    private function validateIsEmptyNumberPhone($model)
-    {
-        if(empty($model->cell_phone) && empty($model->local_phone)){
-            return true; 
-        }else{
-            return false;
         }
     }
 }

@@ -56,6 +56,7 @@ return [
         'admin' => [
             'class' => 'frontend\modules\admin\Module'
         ],
+        
         'setting' => [
             'class' => 'frontend\modules\setting\Setting',
         ],
@@ -63,7 +64,10 @@ return [
          'client' => [
             'class' => 'frontend\modules\client\Client',
          ],
-
+        
+        'quote' => [
+            'class' => 'frontend\modules\quote\Quote',
+        ],
     ],
     
     'params' => $params,

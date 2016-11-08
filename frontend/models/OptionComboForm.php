@@ -5,6 +5,7 @@ use yii;
 use yii\base\Model;
 use backend\models\Option;
 use backend\models\Municipality;
+use backend\models\Service;
 
 class OptionComboForm extends Model
 {
@@ -12,9 +13,9 @@ class OptionComboForm extends Model
     const LINE_BUSINESS = 2;
     const TYPE_DOCUMENT = 3;
     const TYPE_CLIENT = 4;
+    const APPLY_DISCOUNT = 5;
 
-
-    public static function getArrayOptionsCombo($codeCombo, $arrayIndexNotShowOption=''){
+        public static function getArrayOptionsCombo($codeCombo, $arrayIndexNotShowOption=''){
         $option = new Option();
         $arrayOptions = $option->getListOptionCombo($codeCombo);
         if(!empty($arrayIndexNotShowOption)){
@@ -39,6 +40,10 @@ class OptionComboForm extends Model
     
     public static function getArrayOptionsComboMunicipality(){
         return Municipality::getListMunicipality();
+    }
+    
+    public static function getArrayOptionsServices(){
+        return Service::getListServices();
     }
 
 }
