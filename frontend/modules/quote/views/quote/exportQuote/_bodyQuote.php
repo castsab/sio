@@ -3,7 +3,10 @@ use yii\helpers\Html;
 
 $arrayServices = backend\models\QuoteService::getListServices($model->id);
 
-print_r($arrayServices);
+//VHT = (VBMA * 4) * 12 meses / 2000 horas
+//VSB = (VH * EH)
+
+$VHT = ($model->vbma * 4) * (12 / 2000);
 
 ?>
 
@@ -14,6 +17,7 @@ print_r($arrayServices);
         <tr>
             <th>#</th>
             <th>Servicios</th>
+            <th>Valor</th>
         </tr>
     </thead>
     <tbody>
@@ -21,7 +25,9 @@ print_r($arrayServices);
         <tr>
             <td><?= $services['id_service'] ?></td>
             <td><?= $services['name'] ?></td>
+            <td><?= '$'.str_replace(',','.',number_format(trim(($services['estimate_hours'] * $VHT)))) ?></td>
         </tr>
     <?php }?>
     </tbody>
 </table>
+

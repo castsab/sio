@@ -15,6 +15,8 @@ use Yii;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $status_quote
+ * @property integer $vbma   
  */
 class Quote extends \yii\db\ActiveRecord
 {
@@ -33,7 +35,7 @@ class Quote extends \yii\db\ActiveRecord
     {
         return [
             [['document', 'apply_discount'], 'required'],
-            [['id', 'id_user', 'document', 'apply_discount', 'discount', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'id_user', 'document', 'apply_discount', 'discount', 'status', 'created_at', 'updated_at','status_quote','vbma'], 'integer'],
             [['document'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['document' => 'document']],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
@@ -64,6 +66,7 @@ class Quote extends \yii\db\ActiveRecord
             $this->status=1;
             $this->id=$this->getConsecutiveQuote();
             $this->id_user = Yii::$app->user->identity->id;
+            $this->status_quote = 1;
         } else {
             $this->updated_at=$time;
         }
