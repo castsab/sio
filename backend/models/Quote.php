@@ -83,4 +83,29 @@ class Quote extends \yii\db\ActiveRecord
         
         return $result;
     }
+    
+    public function beforeDelete(){
+        if (parent::beforeDelete()) {
+            $this->deleteRelationships();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private function deleteRelationships()
+    {
+        $this->deleteQuoteService();
+    }
+
+    private function deleteQuoteService()
+    {
+        $arrayQuoteService = QuoteService::findAll([
+            'id_quote' => $this->id,
+        ]);
+
+        foreach ($arrayQuoteService as $quoteServicervice) {
+            $quoteServicervice->delete();
+        }
+    }
 }
