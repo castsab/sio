@@ -20,4 +20,11 @@ class BaseController extends Controller
         }
         return ['state' => $state, 'message' => $message, 'model' => $model];
     }
+    
+    public static function validateIsEmptyParamVBMA() {
+        if(empty(Yii::$app->params['VBMA']))
+            return true;
+        else
+            return false;
+    }
 }

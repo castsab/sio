@@ -81,7 +81,13 @@ class QuoteController extends Controller
                 $state = '2';
                 return ['state' => $state,'message' => $message,'model'=>$model];
             }else{
-                return \backend\controllers\BaseController::validateForm($model);
+                if(\backend\controllers\BaseController::validateIsEmptyParamVBMA() == 1){
+                    $message = 'El VBMA no esta parametrizado';
+                    $state = '2';
+                    return ['state' => $state,'message' => $message,'model'=>$model];
+                }else{
+                    return \backend\controllers\BaseController::validateForm($model);
+                }
             }
         } else {
             return $this->renderAjax('create', [
