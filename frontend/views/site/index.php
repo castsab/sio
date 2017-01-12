@@ -3,7 +3,10 @@
 
 $this->title = 'SIO';
 
-$arrayOptionsMenu = backend\models\AuthItem::getListModules();
+$arrayOptionsMenu = [];
+
+if (!Yii::$app->user->isGuest) 
+    $arrayOptionsMenu = backend\models\AuthItem::getListModules();
 ?>
 <div class="site-index">
 
