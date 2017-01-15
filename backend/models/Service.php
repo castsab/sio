@@ -70,7 +70,7 @@ class Service extends \yii\db\ActiveRecord
     }
     
     public static function getListServices() {
-        $array = self::find()->select(['id','name'])->where(['status'=>1])->orderBy('name ASC')->all();
+        $array = self::find()->select(['id', new \yii\db\Expression("CONCAT('cod:',`id`, ' - ', `name`) as name")])->where(['status'=>1])->orderBy('name ASC')->all();
         return \yii\helpers\ArrayHelper::map($array, 'id', 'name');
         
     }

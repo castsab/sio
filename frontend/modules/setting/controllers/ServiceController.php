@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use backend\models\ActivitySearch;
+
 /**
  * ServiceController implements the CRUD actions for Service model.
  */
@@ -51,8 +53,13 @@ class ServiceController extends Controller
      */
     public function actionView($id)
     {
+        $modelSearchActivity = new ActivitySearch();
+        $dataSearchActivity = $modelSearchActivity->search(Yii::$app->request->queryParams,$id);
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'modelSearchActivity' => $modelSearchActivity,
+            'dataSearchActivity' => $dataSearchActivity
         ]);
     }
 

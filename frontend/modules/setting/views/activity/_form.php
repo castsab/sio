@@ -3,17 +3,15 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Activity */
-/* @var $form yii\widgets\ActiveForm */
+use frontend\models\OptionComboForm;
 ?>
 
 <div class="activity-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'activity-form']); ?>
 
-    <?= $form->field($model, 'id_service')->textInput() ?>
-
+    <?= $form->field($model, 'id_service')->hiddenInput(['value'=>$id_service])->label(false) ?>
+    
     <?= $form->field($model, 'code')->textInput() ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -22,7 +20,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'order')->textInput() ?>
 
-    <?= $form->field($model, 'state')->textInput() ?>
+    <?php 
+    if(!$model->isNewRecord)
+        echo $form->field($model, 'state')->dropDownList(OptionComboForm::getArrayOptionsCombo(OptionComboForm::REGISTRY_STATUS),['prompt'=>Yii::t('app','Select')]); 
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

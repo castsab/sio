@@ -39,7 +39,7 @@ class ActivitySearch extends Activity
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$id=null)
     {
         $query = Activity::find();
 
@@ -65,10 +65,13 @@ class ActivitySearch extends Activity
             'order' => $this->order,
             'state' => $this->state,
         ]);
-
+        
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description]);
 
+        if($id != null)
+            $query->andFilterWhere(['id_service'=>$id]);
+        
         return $dataProvider;
     }
 }

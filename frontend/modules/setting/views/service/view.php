@@ -40,3 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<?php 
+echo $this->render('/activity/index', [
+    'searchModel' => $modelSearchActivity,
+    'dataProvider' => $dataSearchActivity,
+    'id_service' => $model->id
+]); 
+?>
