@@ -67,6 +67,7 @@ class Quote extends \yii\db\ActiveRecord
             $this->id=$this->getConsecutiveQuote();
             $this->id_user = Yii::$app->user->identity->id;
             $this->status_quote = 1;
+            $this->vbma = Yii::$app->params['VBMA'];
         } else {
             $this->updated_at=$time;
         }
@@ -108,4 +109,5 @@ class Quote extends \yii\db\ActiveRecord
             $quoteServicervice->delete();
         }
     }
+    
 }

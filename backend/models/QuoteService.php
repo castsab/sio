@@ -1,6 +1,7 @@
 <?php
 
 namespace backend\models;
+use backend\models\Quote;
 
 use Yii;
 
@@ -16,6 +17,7 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $activity
+ * @property string $value_basis_service
  */
 class QuoteService extends \yii\db\ActiveRecord
 {
@@ -38,6 +40,7 @@ class QuoteService extends \yii\db\ActiveRecord
             [['id_quote'], 'exist', 'skipOnError' => true, 'targetClass' => Quote::className(), 'targetAttribute' => ['id_quote' => 'id']],
             [['id_service'], 'exist', 'skipOnError' => true, 'targetClass' => Service::className(), 'targetAttribute' => ['id_service' => 'id']],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
+            [['value_basis_service'], 'number'],
         ];
     }
 
@@ -56,11 +59,15 @@ class QuoteService extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'activity' => Yii::t('app', 'Activity'),
+            'value_basis_service' => Yii::t('app', 'Value Basis Service'),
         ];
     }
     
     public function beforeSave($insert) {
         $time = time();
+        
+        $valueHour = $this->getValueWorkingHour($this->id_quote);
+        
         if ($insert) {
             $this->created_at=$time;
             $this->updated_at=$time;
@@ -68,7 +75,7 @@ class QuoteService extends \yii\db\ActiveRecord
             $this->id_user = Yii::$app->user->identity->id;
             $arrayActivitys = implode(";", $this->activity);
             $this->activity = $arrayActivitys;
-            
+            $this->value_basis_service = ($valueHour * $this->estimate_hours);
         } else {
             $this->updated_at=$time;
             $arrayActivitys = implode(";", $this->activity);
@@ -85,5 +92,10 @@ class QuoteService extends \yii\db\ActiveRecord
     
     public static function getListServices($id_quote){
         return self::find()->select('*')->where(['quote_service.status'=>1,'id_quote'=>$id_quote])->innerJoin('service','service.id=quote_service.id_service')->asArray()->all();
+    }
+    
+    public function getValueWorkingHour($id_quote){
+        $quote = Quote::find()->where(['id'=>$id_quote])->one();
+        return (($quote->vbma * 5) * 12 / 2000);
     }
 }

@@ -86,7 +86,6 @@ class QuoteController extends Controller
                     $state = '2';
                     return ['state' => $state,'message' => $message,'model'=>$model];
                 }else{
-                    $model->vbma = Yii::$app->params['VBMA'];
                     return \backend\controllers\BaseController::validateForm($model);
                 }
             }
