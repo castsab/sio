@@ -54,4 +54,13 @@ class Activity extends \yii\db\ActiveRecord
             'state' => Yii::t('app', 'State'),
         ];
     }
+    
+    public static function getListActivitiesOfService($id_service){
+        $activitiesCode = self::find()->andWhere(['id_service' => $id_service])->all();
+        foreach ($activitiesCode as $activityCode) {
+            $data[$activityCode->name] = $activityCode->name;
+        }
+        return $data;
+    }
+    
 }

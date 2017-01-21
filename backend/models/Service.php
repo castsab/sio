@@ -75,4 +75,13 @@ class Service extends \yii\db\ActiveRecord
         
     }
     
+    public static function getNameService($id_service){
+        $result="";
+        $model=  self::find()->where(['id'=>$id_service])->one();
+        if ($model) {
+            $result= $model->name;
+        }
+        return $result;
+    }
+    
 }

@@ -123,4 +123,14 @@ class ActivityController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    public function actionListActivities($id)
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $activitiesCode = Activity::find()->andWhere(['id_service' => $id])->all();
+        foreach ($activitiesCode as $activityCode) {
+            $data[] = ['id' => $activityCode->name, 'text' => $activityCode->name];
+        }
+        return ['data' => $data];
+    }
 }

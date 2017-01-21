@@ -15,6 +15,7 @@ use Yii;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $activity
  */
 class QuoteService extends \yii\db\ActiveRecord
 {
@@ -32,7 +33,7 @@ class QuoteService extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_service', 'estimate_hours'], 'required'],
+            [['id_service', 'estimate_hours','activity'], 'required'],
             [['id_quote', 'id_user', 'id_service', 'estimate_hours', 'status', 'created_at', 'updated_at'], 'integer'],
             [['id_quote'], 'exist', 'skipOnError' => true, 'targetClass' => Quote::className(), 'targetAttribute' => ['id_quote' => 'id']],
             [['id_service'], 'exist', 'skipOnError' => true, 'targetClass' => Service::className(), 'targetAttribute' => ['id_service' => 'id']],
@@ -54,6 +55,7 @@ class QuoteService extends \yii\db\ActiveRecord
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'activity' => Yii::t('app', 'Activity'),
         ];
     }
     
@@ -64,8 +66,13 @@ class QuoteService extends \yii\db\ActiveRecord
             $this->updated_at=$time;
             $this->status=1;
             $this->id_user = Yii::$app->user->identity->id;
+            $arrayActivitys = implode(";", $this->activity);
+            $this->activity = $arrayActivitys;
+            
         } else {
             $this->updated_at=$time;
+            $arrayActivitys = implode(";", $this->activity);
+            $this->activity = $arrayActivitys;
         }
         return parent::beforeSave($insert);
     }
