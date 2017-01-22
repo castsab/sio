@@ -3,4 +3,4 @@ use yii\helpers\Html;
 
 ?>
 
-<h1>Footer</h1>
+<h1>DIÁgiles</h1>

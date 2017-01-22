@@ -2,4 +2,8 @@
 use yii\helpers\Html;
 ?>
 
-<h1>Header</h1>
+
+<center>
+    <centering>
+<h1>DIÁgiles</h1>
+</center>
