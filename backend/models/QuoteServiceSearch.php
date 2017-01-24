@@ -18,7 +18,7 @@ class QuoteServiceSearch extends QuoteService
     public function rules()
     {
         return [
-            [['id', 'id_quote', 'id_user', 'id_service', 'estimate_hours', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'id_quote', 'id_user', 'id_service', 'activity', 'estimate_hours', 'status', 'created_at', 'updated_at'], 'integer'],
         ];
     }
 
@@ -62,6 +62,7 @@ class QuoteServiceSearch extends QuoteService
             'id_quote' => $this->id_quote,
             'id_user' => $this->id_user,
             'id_service' => $this->id_service,
+            'activity' => $this->activity,
             'estimate_hours' => $this->estimate_hours,
             'status' => $this->status,
             'created_at' => $this->created_at,

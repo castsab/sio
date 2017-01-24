@@ -25,6 +25,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id_user') ?>
 
     <?= $form->field($model, 'id_service') ?>
+    
+    <?= $form->field($model, 'activity') ?>
 
     <?= $form->field($model, 'estimate_hours') ?>
 

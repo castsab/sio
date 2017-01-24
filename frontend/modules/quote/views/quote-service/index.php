@@ -28,10 +28,11 @@ QuoteServiceAsset::register($this);
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'id_quote',
-            'id_user',
+            //'id',
+            //'id_quote',
+            //'id_user',
             'id_service',
+            'activity',
             'estimate_hours',
             
             [
