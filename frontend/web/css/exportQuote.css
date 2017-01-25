@@ -3,8 +3,88 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : 8/11/2016, 02:38:02 PM
     Author     : Programador
 */
 
+body{
+  font-family: sans-serif;
+}
+.header-logo-img{
+  background-color: #EDEDED;
+  height: 100px;
+  width: 250px;
+  display:inline-block;
+}
+.info-quotation{
+  display:inline-block;
+  margin-left: 60%;
+  margin-top: -100px;
+  width: 40%;
+}
+.info-quotation table{
+  width: 100%;
+  /*background-color: #EDEDED;*/
+  font-family: sans-serif;
+  border-spacing: 0;
+}
+.info-quotation table thead tr th{
+  font-size: 28px;
+  font-weight: 400;
+  border:1px solid #000000;
+}
+.info-quotation table tbody tr td{
+  font-size: 12px;
+  text-align: right;
+  border-top: none;
+  padding:2px 10px 2px 10px;
+  border-left:1px solid #000000;
+}
+.info-quotation .quote-data{
+  text-align: left!important;
+  border-right:1px solid #000000;
+}
+.info-quotation .quote-last-child td{
+  border-bottom:1px solid #000000;
+}
+.contents-table-quotation{
+  width: 100%;
+  /*border:1px solid #000000;*/
+  margin:20px 0px;
+  border-spacing: 0;
+}
+.contents-table-quotation thead tr th{
+  background: #DADADA;
+  border:solid 2px #DADADA;
+  padding: 5px;
+}
+.contents-table-quotation thead tr td{
+  background: #EDEDED;
+  border:solid 2px #DADADA;
+  padding: 5px;
+}
+.contents-table-quotation tbody tr td{
+  border-bottom: solid 1px #DADADA;
+  padding: 5px;
+}
+.applicant-label{
+  font-weight: bold;
+}
+.quotation-labels{
+  font-size: 12px;
+}
+.quotation-labels ul{
+  list-style-type: none;
+  margin: none;
+  margin:0px 10px 50px 49px;
+}
+h2{
+  width: 100%;
+  display: inline-block;
+  background-color: #DADADA;
+}
+.page-number{
+  text-align: center;
+  width: 100%;
+}

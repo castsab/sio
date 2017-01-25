@@ -3,4 +3,4 @@ use yii\helpers\Html;
 
 ?>
 
-<h1>DIÁgiles</h1>
+<label class="page-number">1/2</label>
