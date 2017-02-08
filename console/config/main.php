@@ -6,6 +6,8 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
+$db = require(__DIR__ . '/../../common/config/main-local.php');
+
 return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
@@ -26,6 +28,7 @@ return [
             'defaultRoles' => ['guest'],
         ],
         
+        'db' => $db['components']['db'],
     ],
     'params' => $params,
 ];
