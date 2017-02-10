@@ -121,5 +121,23 @@ class Client extends \yii\db\ActiveRecord
             "CASE WHEN type_client = 1 THEN CONCAT(document,' - ',first_name,' ', last_name) ELSE CONCAT(document,' - ',name_company) END as fullname"
         ])->where(['status'=>1])->all(), 'document', 'fullname');
     }
+    
+    public static function getNameClient($document){
+        $result="";
+        $model= self::find()->where(['document'=>$document])->one();
+        if ($model) {
+            $result= $model->first_name.' '.$model->last_name;
+        }
+        return $result;
+    }
+    
+    public function getClientDataArray($document){
+        $result="";
+        $model= self::find()->where(['document'=>$document])->one();
+        if ($model) {
+            $result= $model;
+        }
+        return $result; 
+    }
 } 
 

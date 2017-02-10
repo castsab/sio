@@ -164,7 +164,7 @@ class QuoteController extends Controller
     public function actionExportQuote($id) {
         $model = $this->findModel($id);
         $time = time();
-        $header = $this->renderPartial('exportQuote/_headerQuote');
+        $header = $this->renderPartial('exportQuote/_headerQuote',['model' => $model]);
         $footer = $this->renderPartial('exportQuote/_footerQuote');
         $content = $this->renderPartial('exportQuote/_bodyQuote', ['model' => $model]);
         $conditionsQuote = $this->renderPartial('exportQuote/_conditionsQuote', ['model' => $model]);

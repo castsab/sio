@@ -1,25 +1,26 @@
 <?php
 
 use yii\helpers\Html;
+use backend\models\JHelper;
+use backend\models\Client;
 
+$jHelper = new JHelper();
 $arrayServices = backend\models\QuoteService::getListServices($model->id);
-
-//VHT = (VBMA * 4) * 12 meses / 2000 horas
-//VSB = (VH * EH)
-
-$VHT = ($model->vbma * 4) * (12 / 2000);
+$client = new Client();
+$arrayClientData = $client->getClientDataArray($model->document);
+$totalBaseValueServices = 0;
 ?>
 
 
 <div class="quotation-labels">
-    <label>Cotización para:<span>Jimi Hendrix</span></label>
+    <label>Cotización para:<span><?= Client::getNameClient($model->document) ?></span></label>
     <ul>
-        <li>jimihendrix@landinland.com</li>
-        <li>031 2556203</li>
-        <li>lady landiland S.A.S</li>
+        <li><?= $arrayClientData->address ?></li>
+        <li><?= $arrayClientData->cell_phone ?></li>
+        <li><?= $arrayClientData->name_company ?></li>
     </ul>
 </div>
-<label><span class="applicant-label">Jimi Hendrix</span> agradeciendo su confianza le presentamos su cotización.</label>
+<label><span class="applicant-label"><?= Client::getNameClient($model->document) ?></span> agradeciendo su confianza le presentamos su cotización.</label>
 
 <table class="contents-table-quotation">
     <thead>
@@ -39,27 +40,32 @@ $VHT = ($model->vbma * 4) * (12 / 2000);
                 <td><?= $services['id_service'] ?></td>
                 <td><?= $services['name'] ?></td>
                 <td><?= $services['activity'] ?></td>
-                <td><?= '$' . str_replace(',', '.', number_format(trim(($services['estimate_hours'] * $VHT)))) ?></td>
+                <td><?= '$' . $jHelper->getValueFormat($services['value_basis_service']) ?></td>
             </tr>
-        <?php } ?>
+        <?php 
+            $totalBaseValueServices += $services['value_basis_service']; 
+        } 
+        ?>
 
         <tr>
             <td></td>
             <td></td>
-            <td>IVA:</td>
-            <td>$$$$</td>
+            <td>Descuento:</td>
+            <td><?= (!empty($model->discount))?'$' . $jHelper->getValueFormat($jHelper->getValueQuoteWithDiscount($totalBaseValueServices,$model->discount)):0; ?></td>
         </tr>
+            
         <tr>
             <td></td>
             <td></td>
-            <td>Descuento:</td>
-            <td>$$$$</td>
+            <td>IVA:</td>
+            <td><?= '$' . $jHelper->getValueFormat($jHelper->getIvaQuote($totalBaseValueServices)) ?></td>
         </tr>
+        
         <tr>
             <td></td>
             <td></td>
             <td>Valor Total:</td>
-            <td>$$$$</td>
+            <td><?= '$' . $jHelper->getValueFormat($jHelper->getValueQuoteWithIva($totalBaseValueServices)) ?></td>
         </tr>
 
     </tbody>
