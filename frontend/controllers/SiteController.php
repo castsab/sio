@@ -13,9 +13,10 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
-/**
- * Site controller
- */
+use frontend\models\ValidatePersonForm;
+use frontend\models\RegisterUserPersonForm;
+use backend\models\Person;
+
 class SiteController extends Controller
 {
     /**
@@ -209,5 +210,59 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+    
+    public function actionValidatePerson()
+    {
+        $model = new ValidatePersonForm();
+        
+        if ($model->load(Yii::$app->request->post())) {
+            $person = $model->findPerson();
+            if($person){
+                return $this->redirect(['register-user','document'=>$person->document]);
+            }else{
+                Yii::$app->getSession()->setFlash('success', 'Usted no está registrado o ya tiene un usuario activo, favor valide con el administrador del sistema.');
+            }
+        }
+
+        return $this->render('validatePerson', [
+            'model' => $model,
+        ]);
+    }
+    
+    public function actionRegisterUser($document){
+        $model = new RegisterUserPersonForm();
+        $modelPerson = new Person();
+        
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->setRegisterUserPerson() != null){
+                $arrayData = Yii::$app->request->post();
+                $model->setUpdateActiveStateUserPerson($document);
+                $model->setUpdateDocumentUser($arrayData['RegisterUserPersonForm']['username'],$document);
+                
+                $arrayDataLogin = [
+                    'username' => $arrayData['RegisterUserPersonForm']['username'],
+                    'password' => $arrayData['RegisterUserPersonForm']['password']
+                ];
+                
+                $this->loginUserPerson($arrayDataLogin);
+                
+            }else{
+                Yii::$app->getSession()->setFlash('success', 'Problemas para registrar el usuario, favor valide con el administrador del sistema.');
+            }
+        }
+        
+        return $this->render('registerUser', [
+            'model' => $model,
+            'modelPerson' => $modelPerson->findOne($document),
+        ]);
+    }
+    
+    public function loginUserPerson($arrayDataLogin){
+        $loginForm = new LoginForm();
+        if ($loginForm->load($arrayDataLogin,'')) {
+            $loginForm->login();
+            $this->goBack();
+        }
     }
 }

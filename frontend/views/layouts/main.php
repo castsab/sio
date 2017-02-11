@@ -41,7 +41,7 @@ AppAsset::register($this);
     $menuItems[] = "";
     
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/validate-person']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems = \frontend\models\MenuForm::getMenu();

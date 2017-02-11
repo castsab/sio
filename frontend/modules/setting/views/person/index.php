@@ -2,22 +2,21 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ClientSearch */
+/* @var $searchModel backend\models\PersonSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Clients');
+$this->title = Yii::t('app', 'People');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="client-index">
+<div class="person-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Client'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Person'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -28,12 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'type_document',
             'document',
-            'type_client',
-            'city_origin',
-            'status',
-           
+            'first_name',
+            'last_name',
+            'email:email',
+            // 'phone',
+            // 'quote_person_natural',
+            // 'active_user',
+            // 'status',
+            // 'created_at',
+            // 'updated_at',
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-    
 </div>
