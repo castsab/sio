@@ -4,20 +4,26 @@ namespace backend\models;
 
 use Yii;
 
-/**
- * This is the model class for table "quote".
- *
+/** 
+ * This is the model class for table "quote". 
+ * 
  * @property string $id
- * @property integer $id_user
+ * @property int $id_user
  * @property string $document
- * @property integer $apply_discount
- * @property integer $discount
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $status_quote
- * @property integer $vbma   
- */
+ * @property int $discount
+ * @property int $status
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $apply_discount
+ * @property int $status_quote
+ * @property int $vbma
+ * @property string $document_person
+ * @property int $quote_person_natural
+ * 
+ * @property Client $document0
+ * @property User $user
+ * @property QuoteService[] $quoteServices
+ */ 
 class Quote extends \yii\db\ActiveRecord
 {
     /**
@@ -35,9 +41,9 @@ class Quote extends \yii\db\ActiveRecord
     {
         return [
             [['document', 'apply_discount'], 'required'],
-            [['id', 'id_user', 'document', 'apply_discount', 'discount', 'status', 'created_at', 'updated_at','status_quote','vbma'], 'integer'],
+            [['id', 'id_user', 'document', 'discount', 'status', 'created_at', 'updated_at', 'apply_discount', 'status_quote', 'vbma', 'document_person', 'quote_person_natural'], 'integer'],
             [['document'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['document' => 'document']],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']]
         ];
     }
 
@@ -50,11 +56,15 @@ class Quote extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'id_user' => Yii::t('app', 'Id User'),
             'document' => Yii::t('app', 'Document'),
-            'apply_discount' => Yii::t('app', 'Apply Discount'),
             'discount' => Yii::t('app', 'Discount'),
             'status' => Yii::t('app', 'Status'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'apply_discount' => Yii::t('app', 'Apply Discount'),
+            'status_quote' => Yii::t('app', 'Status Quote'),
+            'vbma' => Yii::t('app', 'Vbma'),
+            'document_person' => Yii::t('app', 'Document Person'),
+            'quote_person_natural' => Yii::t('app', 'Quote Person Natural'),
         ];
     }
     

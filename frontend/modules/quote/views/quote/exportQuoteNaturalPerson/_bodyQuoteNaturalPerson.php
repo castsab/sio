@@ -57,15 +57,8 @@ $totalBaseValueServices = 0;
         <tr>
             <td></td>
             <td></td>
-            <td>IVA(19%):</td>
-            <td><?= '$' . $jHelper->getValueFormat($jHelper->getIvaQuote($totalBaseValueServices)) ?></td>
-        </tr>
-        
-        <tr>
-            <td></td>
-            <td></td>
             <td>Valor Total:</td>
-            <td><?= '$' . ($jHelper->getValueFormat(($jHelper->getValueQuoteWithIva($totalBaseValueServices) - $jHelper->getQuoteDiscount($totalBaseValueServices,$model->discount)))) ?></td>
+            <td><?= '$' . $jHelper->getValueFormat($jHelper->getValueQuoteWithDiscount($totalBaseValueServices,$model->discount)) ?></td>
         </tr>
 
     </tbody>

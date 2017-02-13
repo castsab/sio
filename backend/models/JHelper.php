@@ -13,7 +13,7 @@ class JHelper {
     }
     
     public function getValueQuoteWithDiscount($value,$discount=0){
-        return ($value + ($value * $discount / 100));
+        return ($value - ($value * $discount / 100));
     }
     
     public function getIvaQuote($value){
@@ -22,6 +22,10 @@ class JHelper {
     
     public function getDateFormat($timestamp){
         return date("d-m-Y",$timestamp);
+    }
+    
+    public function getQuoteDiscount($value,$discount=0){
+        return ($value * $discount / 100);
     }
     
 }

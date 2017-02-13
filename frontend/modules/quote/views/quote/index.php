@@ -61,7 +61,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     },
                     'print' => function ($url, $model) {
                         if(\backend\models\QuoteService::getNumberServices($model->id) != 0){
-                            return Html::a('<span class="glyphicon glyphicon-print"></span>',yii\helpers\Url::to(['quote/export-quote', 'id'=>$model->id]), 
+                            
+                            $action = ($model->quote_person_natural == 1)?'quote/export-quote-natural-person':'quote/export-quote';
+                            
+                            return Html::a('<span class="glyphicon glyphicon-print"></span>', yii\helpers\Url::to([$action, 'id'=>$model->id]), 
                             [
                                 'title' => Yii::t('app', 'Print quote'),
                                 'style' => 'cursor:pointer;',
