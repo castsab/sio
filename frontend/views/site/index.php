@@ -18,7 +18,7 @@ if (!Yii::$app->user->isGuest)
                 <div class="list-group" style="font-size: 30px;">
                     <?php foreach ($arrayOptionsMenu as $optionsMenu) {?>
                     <a href="<?= \yii\helpers\Url::to(["/".$optionsMenu['description'].""])?>" class="list-group-item">
-                        <span class="glyphicon glyphicon-ok"></span> <?= $optionsMenu['name']?> 
+                        <span class="glyphicon glyphicon-ok"></span> <?= Yii::t('app',$optionsMenu['name']) ?> 
                     </a>
                     <?php }?>
                 </div>

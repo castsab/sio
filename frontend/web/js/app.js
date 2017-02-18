@@ -1,3 +1,8 @@
+history.pushState({ page: 1 }, "sio", "#sio");
+window.onhashchange = function (event) {
+    window.location.hash = "sio";
+};
+
 var baseUrl = '';
 
 $(document).ready(function(){

@@ -1,5 +1,31 @@
 <?php
 
 return [
+    'Administration'=>'Administración',
+    'Configuration'=>'Configuración',
+    'Customers'=>'Clientes',
+    'Quotes'=>'Cotizaciones',
+    'Clients'=>'Clientes',
+    'Type Client'=>'Tipo de cliente',
+    'City Origin'=>'Ciudad de origen',
+    'Status'=>'Estado',
+    'Document'=>'Documento',
+    'Create Client'=>'Crear cliente',
+    'Type Document'=>'Tipo de documento',
+    'First Name'=>'Nombres',
+    'Last Name' => 'Apellidos',
+    'Office Address' => 'Dirección de la oficina',
+    'Email' => 'Correo electronico',
+    'Cell Phone'=> 'Telefono celular',
+    'Name Company' => 'Nombre de la compañia',
+    'Address' => 'Dirección',
+    'Web Site' => 'Sitio web',
+    'Update Client'=> 'Actualizar cliente',
+    'Created At'=> 'Fecha de creación',
+    'Create Quote' => 'Crear cotización',
+    'Client' => 'Cliente',
+    'Apply Discount' => 'Aplicar descuento',
+    'Discount' => 'Descuento',
+    'Update Quote' => 'Actualizar cotización',
     
 ];
