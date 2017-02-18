@@ -21,9 +21,8 @@ use Yii;
  */
 class Person extends \yii\db\ActiveRecord
 {
-    /**
-     * @inheritdoc
-     */
+    public $fullname;
+    
     public static function tableName()
     {
         return 'person';
@@ -70,5 +69,21 @@ class Person extends \yii\db\ActiveRecord
             $this->updated_at=$time;
         }
         return parent::beforeSave($insert);
+    }
+    
+    public static function getPersonArray(){
+        return \yii\helpers\ArrayHelper::map(self::find()->select([
+            "document", 
+            "CONCAT(document,' - ',first_name,' ', last_name) as fullname"
+        ])->where(['status'=>1,'quote_person_natural'=>1])->all(), 'document', 'fullname');
+    }
+    
+    public function getPersonDataArray($document){
+        $result="";
+        $model= self::find()->where(['document'=>$document])->one();
+        if ($model) {
+            $result= $model;
+        }
+        return $result; 
     }
 }

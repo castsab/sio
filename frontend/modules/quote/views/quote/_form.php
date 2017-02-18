@@ -5,6 +5,25 @@ use yii\widgets\ActiveForm;
 
 use kartik\select2\Select2;
 use frontend\models\OptionComboForm;
+
+$this->registerJs("
+    
+    $('#quote-document_person').attr('disabled', true);
+
+    $('.quote-person-natural').change(function(e){
+        
+        var quotePersonNatural = $('input:radio:checked').val();
+        
+        if(quotePersonNatural == 1){
+            $('#quote-document_person').attr('disabled', false);
+        }else{
+            $('#quote-document_person').attr('disabled', true);
+            $('#quote-document_person').val('').change();
+        }
+
+    });"
+);
+
 ?>
 
 <div id="message-contact"></div>
@@ -13,6 +32,21 @@ use frontend\models\OptionComboForm;
 
     <?php $form = ActiveForm::begin(['id'=>'quote-form']); ?>
 
+    <?php
+    if($model->isNewRecord)
+        $model->quote_person_natural = 0; 
+    
+    echo $form->field($model, 'quote_person_natural')->radioList([0 => 'No',1 => 'Si'],['class'=>'quote-person-natural']); 
+    ?>
+    
+    <?php 
+        echo $form->field($model, 'document_person')->widget(Select2::classname(), [
+            'options' => ['placeholder' => Yii::t('app','Select'),'multiple' => false],
+            'language' => 'es',
+            'data' => \backend\models\Person::getPersonArray(),
+        ])->label(Yii::t('app','Person'));
+    ?>
+    
     <?php 
         echo $form->field($model, 'document')->widget(Select2::classname(), [
             'options' => ['placeholder' => Yii::t('app','Select'),'multiple' => false],

@@ -86,7 +86,13 @@ class QuoteController extends Controller
                     $state = '2';
                     return ['state' => $state,'message' => $message,'model'=>$model];
                 }else{
-                    return \backend\controllers\BaseController::validateForm($model);
+                    if($this->validateIsEmptyPerson($model) == 1){
+                        $message = 'Persona no puede estar vacio';
+                        $state = '2';
+                        return ['state' => $state,'message' => $message,'model'=>$model];
+                    }else{
+                        return \backend\controllers\BaseController::validateForm($model);
+                    }
                 }
             }
         } else {
@@ -113,7 +119,13 @@ class QuoteController extends Controller
                 $state = '2';
                 return ['state' => $state,'message' => $message,'model'=>$model];
             }else{
-                return \backend\controllers\BaseController::validateForm($model);
+                if($this->validateIsEmptyPerson($model) == 1){
+                    $message = 'Persona no puede estar vacio';
+                    $state = '2';
+                    return ['state' => $state,'message' => $message,'model'=>$model];
+                }else{
+                    return \backend\controllers\BaseController::validateForm($model);
+                }
             }
         } else {
             return $this->renderAjax('update', [
@@ -168,6 +180,41 @@ class QuoteController extends Controller
         $footer = $this->renderPartial('exportQuote/_footerQuote');
         $content = $this->renderPartial('exportQuote/_bodyQuote', ['model' => $model]);
         $conditionsQuote = $this->renderPartial('exportQuote/_conditionsQuote', ['model' => $model]);
+
+        $mpdf = new mPDF('c', 'A4', '12', '', 10, 10, 48, 50, 16, 9);
+        $mpdf->SetDisplayMode('fullpage');
+        
+        $stylesheet = file_get_contents("../web/css/exportQuote.css");
+        $mpdf->WriteHTML($stylesheet, 1);
+
+        $mpdf->SetHTMLHeader($header);
+        $mpdf->setFooter($footer);
+        $mpdf->WriteHTML($content);
+        $mpdf->WriteHTML($conditionsQuote);
+
+        $name = 'XXX-' . $model->id .'-'.$time;
+        
+        echo $mpdf->Output($folder . $name . '.pdf', "I");
+        exit;
+    }
+    
+    private function validateIsEmptyPerson($model)
+    {
+        if($model->quote_person_natural == 1){
+            if(empty($model->document_person))
+                return true;
+            else
+                return false;
+        }
+    }
+    
+    public function actionExportQuoteNaturalPerson($id) {
+        $model = $this->findModel($id);
+        $time = time();
+        $header = $this->renderPartial('exportQuoteNaturalPerson/_headerQuoteNaturalPerson',['model' => $model]);
+        $footer = $this->renderPartial('exportQuoteNaturalPerson/_footerQuoteNaturalPerson');
+        $content = $this->renderPartial('exportQuoteNaturalPerson/_bodyQuoteNaturalPerson', ['model' => $model]);
+        $conditionsQuote = $this->renderPartial('exportQuoteNaturalPerson/_conditionsQuoteNaturalPerson', ['model' => $model]);
 
         $mpdf = new mPDF('c', 'A4', '12', '', 10, 10, 48, 50, 16, 9);
         $mpdf->SetDisplayMode('fullpage');

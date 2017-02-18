@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use frontend\models\OptionComboForm;
-
 ?>
 
 <div class="person-form">
