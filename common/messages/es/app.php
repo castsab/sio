@@ -27,5 +27,13 @@ return [
     'Apply Discount' => 'Aplicar descuento',
     'Discount' => 'Descuento',
     'Update Quote' => 'Actualizar cotización',
-    
+    'Quote Person Natural' => 'Cotización persona natural',
+    'Phone' => 'Telefono',
+    'Create Person' => 'Crear persona',
+    'People'=>'Personas',
+    'Create'=>'Crear',
+    'Update'=>'Actualizar',
+    'Update Person'=>'Actualizar persona',
+    'Active User'=>'Activar usuario',
+    'Updated At'=>'Fecha de actualización',
 ];

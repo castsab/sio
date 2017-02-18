@@ -20,12 +20,23 @@ class JHelper {
         return ($value * 19 / 100);
     }
     
-    public function getDateFormat($timestamp){
+    public static function getDateFormat($timestamp){
         return date("d-m-Y",$timestamp);
+    }
+    
+    public static function getDateFormatAudit($timestamp){
+        return date("d-m-Y h:i",$timestamp);
     }
     
     public function getQuoteDiscount($value,$discount=0){
         return ($value * $discount / 100);
     }
     
+    public static function getValueTextStatus($status){
+        return ($status == 1)?'Activo':'Inactivo';
+    }
+    
+    public static function getValueTextQuotePersonNatural($quote_person_natural){
+        return ($quote_person_natural == 1)?'Si':'No';
+    }
 }

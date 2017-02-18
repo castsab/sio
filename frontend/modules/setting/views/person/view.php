@@ -34,11 +34,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'last_name',
             'email:email',
             'phone',
-            'quote_person_natural',
-            'active_user',
-            'status',
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'quote_person_natural',
+                'value'=> backend\models\JHelper::getValueTextQuotePersonNatural($model->quote_person_natural)
+            ],
+            [
+                'attribute' => 'active_user',
+                'value'=> ($model->active_user == 1)?'Si':'No'
+            ],
+            [
+                'attribute' => 'status',
+                'value'=> backend\models\JHelper::getValueTextStatus($model->status)
+            ],
+        
+            [
+                'attribute' => 'created_at',
+                'value'=> backend\models\JHelper::getDateFormatAudit($model->created_at)
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value'=> backend\models\JHelper::getDateFormatAudit($model->updated_at)
+            ],
         ],
     ]) ?>
 

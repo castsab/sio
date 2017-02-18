@@ -34,7 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'document',
             'status',
-            'created_at',
+            
+            [
+                'attribute' => 'created_at',
+                'format' => 'raw',
+                'value'=>function ($model) {
+                    return backend\models\JHelper::getDateFormatAudit($model->created_at);
+                },
+            ],    
             
             [
                 'class' => 'yii\grid\ActionColumn',
