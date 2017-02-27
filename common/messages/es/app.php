@@ -40,4 +40,8 @@ return [
     'Auth Key'=>'Clave de autenticación',
     'Password Hash'=>'Hash de contraseña',
     'Password Reset Token'=>'Restablecer Token de contraseña',
+    'State'=>'Estado',
+    'Create Combo'=>'Crear combo',
+    'Update combo'=>'Actualizar combo',
+    'Code'=>'Código'
 ];
