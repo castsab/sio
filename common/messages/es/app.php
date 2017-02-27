@@ -36,4 +36,8 @@ return [
     'Update Person'=>'Actualizar persona',
     'Active User'=>'Activar usuario',
     'Updated At'=>'Fecha de actualización',
+    'Users'=>'Usuarios',
+    'Auth Key'=>'Clave de autenticación',
+    'Password Hash'=>'Hash de contraseña',
+    'Password Reset Token'=>'Restablecer Token de contraseña',
 ];
