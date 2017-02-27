@@ -43,5 +43,14 @@ return [
     'State'=>'Estado',
     'Create Combo'=>'Crear combo',
     'Update combo'=>'Actualizar combo',
-    'Code'=>'Código'
+    'Code'=>'Código',
+    'Username'=>'Nombre del usuario',
+    'Name'=>'Nombre',
+    'Id Line Business'=>'Id Línea de negocio',
+    'Id User'=>'Id del usuario',
+    'Activities'=>'Actividades',
+    'Create Activity'=>'Crear actividad',
+    'Select'=>'-- Seleccionar --',
+    'Services'=>'Servicios',
+    'Create Service'=>'Crear servicio'
 ];
