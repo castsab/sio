@@ -15,7 +15,7 @@ use frontend\models\OptionComboForm;
 
     <?php 
     if($model->isNewRecord)
-        $form->field($model, 'id')->textInput() 
+        echo $form->field($model, 'id')->textInput() 
     ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
