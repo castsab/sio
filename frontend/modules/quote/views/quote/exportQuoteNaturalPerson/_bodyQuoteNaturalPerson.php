@@ -53,14 +53,26 @@ $totalBaseValueServices = 0;
             <td>Descuento(<?= (!empty($model->discount))?$model->discount:0 ?>%):</td>
             <td><?= (!empty($model->discount))?'- $' . $jHelper->getValueFormat($jHelper->getQuoteDiscount($totalBaseValueServices,$model->discount)):""; ?></td>
         </tr>
+        
+        <?php if($model->quote_iva == 1){ ?>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>IVA(19%):</td>
+            <td><?= '$' . $jHelper->getValueFormat($jHelper->getIvaQuote($totalBaseValueServices)) ?></td>
+        </tr>
+        <?php }?>
             
         <tr>
             <td></td>
             <td></td>
             <td>Valor Total:</td>
+            <?php if($model->quote_iva == 0){ ?>
             <td><?= '$' . $jHelper->getValueFormat($jHelper->getValueQuoteWithDiscount($totalBaseValueServices,$model->discount)) ?></td>
+            <?php }else{ ?>
+            <td><?= '$' . ($jHelper->getValueFormat(($jHelper->getValueQuoteWithIva($totalBaseValueServices) - $jHelper->getQuoteDiscount($totalBaseValueServices,$model->discount)))) ?></td>
+            <?php } ?>
         </tr>
-
     </tbody>
 </table>
 

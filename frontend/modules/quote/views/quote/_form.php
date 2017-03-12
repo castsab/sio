@@ -9,6 +9,7 @@ use frontend\models\OptionComboForm;
 $this->registerJs("
     
     $('#quote-document_person').attr('disabled', true);
+    $('#quote-quote_iva').attr('disabled', true);
     
     $('.quote-person-natural').change(function(e){
         
@@ -16,9 +17,13 @@ $this->registerJs("
         
         if(quotePersonNatural == 1){
             $('#quote-document_person').attr('disabled', false);
+            $('#quote-quote_iva').attr('disabled', false);
         }else{
             $('#quote-document_person').attr('disabled', true);
             $('#quote-document_person').val('').change();
+            
+            $('#quote-quote_iva').attr('disabled', true);
+            $('#quote-quote_iva').val(1);
         }
 
     });"
@@ -35,12 +40,11 @@ $this->registerJs("
     <?php
     if($model->isNewRecord){
         $model->quote_person_natural = 0; 
-        $model->quote_iva = 0; 
+        $model->quote_iva = 1; 
     }
     
     echo $form->field($model, 'quote_person_natural')->radioList([0 => 'No',1 => 'Si'],['class'=>'quote-person-natural']);
-    
-    echo $form->field($model, 'quote_iva')->radioList([0 => 'No',1 => 'Si'],['class'=>'quote-iva']); 
+    echo $form->field($model, 'quote_iva')->dropDownList(['0' => 'No','1' => 'Si']);
     ?>
     
     <?php 

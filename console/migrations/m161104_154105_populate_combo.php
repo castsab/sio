@@ -12,7 +12,7 @@ class m161104_154105_populate_combo extends Migration
     
         $this->execute("
             INSERT INTO `option` (`id_combo`,`code`,`name`,`description`,`order`,`state`) VALUES ('5', '1', 'Si', null, '1', '1');
-            INSERT INTO `option` (`id_combo`,`code`,`name`,`description`,`order`,`state`) VALUES ('5', '2', 'No', null, '2', '1');"
+            INSERT INTO `option` (`id_combo`,`code`,`name`,`description`,`order`,`state`) VALUES ('5', '0', 'No', null, '2', '1');"
         );
     }
 
