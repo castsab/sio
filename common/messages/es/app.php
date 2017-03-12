@@ -52,5 +52,7 @@ return [
     'Create Activity'=>'Crear actividad',
     'Select'=>'-- Seleccionar --',
     'Services'=>'Servicios',
-    'Create Service'=>'Crear servicio'
+    'Create Service'=>'Crear servicio',
+    'Administrative Expenses'=>'Gastos administrativos',
+    'Quote Iva'=>'Cotización con IVA'
 ];

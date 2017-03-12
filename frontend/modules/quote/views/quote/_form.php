@@ -67,6 +67,8 @@ $this->registerJs("
 
     <?= $form->field($model, 'discount')->textInput(['maxlength'=>2]) ?>
 
+    <?= $form->field($model, 'administrative_expenses')->textInput(['maxlength'=>2]) ?>
+    
     <?php 
     if(!$model->isNewRecord) 
         $form->field($model, 'status')->textInput(); 

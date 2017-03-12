@@ -39,4 +39,8 @@ class JHelper {
     public static function getValueTextQuotePersonNatural($quote_person_natural){
         return ($quote_person_natural == 1)?'Si':'No';
     }
+    
+    public static function getValueAdministrativeExpensesQuote($value,$administrativeExpenses=0){
+        return ($value * $administrativeExpenses / 100);
+    }
 }

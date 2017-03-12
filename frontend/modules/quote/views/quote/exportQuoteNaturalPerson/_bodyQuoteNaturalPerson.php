@@ -46,7 +46,13 @@ $totalBaseValueServices = 0;
             $totalBaseValueServices += $services['value_basis_service']; 
         } 
         ?>
-
+        
+        <?php
+        if($model->administrative_expenses != 0){
+            $totalBaseValueServices += $jHelper->getValueAdministrativeExpensesQuote($totalBaseValueServices,$model->administrative_expenses);
+        }
+        ?>
+        
         <tr>
             <td></td>
             <td></td>

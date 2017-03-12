@@ -20,6 +20,7 @@ use Yii;
  * @property string $document_person
  * @property int $quote_person_natural
  * @property int $quote_iva
+ * @property int $administrative_expenses
  * 
  * @property Client $document0
  * @property User $user
@@ -42,7 +43,7 @@ class Quote extends \yii\db\ActiveRecord
     {
         return [
             [['document', 'apply_discount'], 'required'],
-            [['id', 'id_user', 'document', 'discount', 'status', 'created_at', 'updated_at', 'apply_discount', 'status_quote', 'vbma', 'document_person', 'quote_person_natural','quote_iva'], 'integer'],
+            [['id', 'id_user', 'document', 'discount', 'status', 'created_at', 'updated_at', 'apply_discount', 'status_quote', 'vbma', 'document_person', 'quote_person_natural','quote_iva','administrative_expenses'], 'integer'],
             [['document'], 'exist', 'skipOnError' => true, 'targetClass' => Client::className(), 'targetAttribute' => ['document' => 'document']],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']]
         ];
@@ -67,6 +68,7 @@ class Quote extends \yii\db\ActiveRecord
             'document_person' => Yii::t('app', 'Document Person'),
             'quote_person_natural' => Yii::t('app', 'Quote Person Natural'),
             'quote_iva'=>Yii::t('app', 'Quote Iva'),
+            'administrative_expenses' => Yii::t('app', 'Administrative Expenses'),
         ];
     }
     
