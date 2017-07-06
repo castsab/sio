@@ -30,7 +30,6 @@ $totalBaseValueServices = 0;
         <tr>
             <td>Cantidad</td>
             <td>Servicios</td>
-            <td>Actividades</td>
             <td>Valor Base</td>
         </tr>
     </thead>
@@ -39,8 +38,7 @@ $totalBaseValueServices = 0;
             <tr>
                 <td><?= $services['id_service'] ?></td>
                 <td><?= $services['name'] ?></td>
-                <td><?= $services['activity'] ?></td>
-                <td><?= '$' . $jHelper->getValueFormat($services['value_basis_service']) ?></td>
+                <td><?= '$' . $jHelper->getValueFormat(($model->administrative_expenses != 0)?($jHelper->getValueAdministrativeExpensesQuote($services['value_basis_service'],$model->administrative_expenses) + $services['value_basis_service']):$services['value_basis_service']) ?></td>
             </tr>
         <?php 
             $totalBaseValueServices += $services['value_basis_service']; 
@@ -55,7 +53,6 @@ $totalBaseValueServices = 0;
         
         <tr>
             <td></td>
-            <td></td>
             <td>Descuento(<?= (!empty($model->discount))?$model->discount:0 ?>%):</td>
             <td><?= (!empty($model->discount))?'- $' . $jHelper->getValueFormat($jHelper->getQuoteDiscount($totalBaseValueServices,$model->discount)):""; ?></td>
         </tr>
@@ -63,14 +60,12 @@ $totalBaseValueServices = 0;
         <?php if($model->quote_iva == 1){ ?>
         <tr>
             <td></td>
-            <td></td>
             <td>IVA(19%):</td>
             <td><?= '$' . $jHelper->getValueFormat($jHelper->getIvaQuote($totalBaseValueServices)) ?></td>
         </tr>
         <?php }?>
             
         <tr>
-            <td></td>
             <td></td>
             <td>Valor Total:</td>
             <?php if($model->quote_iva == 0){ ?>
