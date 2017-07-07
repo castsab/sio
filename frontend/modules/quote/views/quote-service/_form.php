@@ -63,6 +63,11 @@ use yii\helpers\Json;
     ?>
     
     <?= $form->field($model, 'estimate_hours')->textInput() ?>
+    
+    <?php 
+    if(!$model->isNewRecord){
+        echo $form->field($model, 'value_basis_service')->textInput();
+    ?>
 
     <?php 
     if(!$model->isNewRecord)

@@ -28,7 +28,7 @@ $totalBaseValueServices = 0;
             <th colspan="4">Página Web Ladyland</th>
         </tr>
         <tr>
-            <td>Cantidad</td>
+            <td>ID Servicio</td>
             <td>Servicios</td>
             <td>Valor Base</td>
         </tr>
@@ -38,17 +38,11 @@ $totalBaseValueServices = 0;
             <tr>
                 <td><?= $services['id_service'] ?></td>
                 <td><?= $services['name'] ?></td>
-                <td><?= '$' . $jHelper->getValueFormat(($model->administrative_expenses != 0)?($jHelper->getValueAdministrativeExpensesQuote($services['value_basis_service'],$model->administrative_expenses) + $services['value_basis_service']):$services['value_basis_service']) ?></td>
+                <td><?= '$' . $jHelper->getValueFormat($services['value_basis_service']) ?></td>
             </tr>
         <?php 
             $totalBaseValueServices += $services['value_basis_service']; 
         } 
-        ?>
-        
-        <?php
-        if($model->administrative_expenses != 0){
-            $totalBaseValueServices += $jHelper->getValueAdministrativeExpensesQuote($totalBaseValueServices,$model->administrative_expenses);
-        }
         ?>
         
         <tr>

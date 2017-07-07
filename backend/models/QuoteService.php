@@ -77,6 +77,7 @@ class QuoteService extends \yii\db\ActiveRecord
                 $arrayActivitys = implode(";", $this->activity);
             else
                 $arrayActivitys = "";
+            
             $this->activity = $arrayActivitys;
             $this->value_basis_service = ($valueHour * $this->estimate_hours);
         } else {
@@ -85,7 +86,9 @@ class QuoteService extends \yii\db\ActiveRecord
                 $arrayActivitys = implode(";", $this->activity);
             else
                 $arrayActivitys = "";
+            
             $this->activity = $arrayActivitys;
+            $this->value_basis_service = $this->value_basis_service;
         }
         return parent::beforeSave($insert);
     }
