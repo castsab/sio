@@ -47,8 +47,10 @@ use yii\helpers\Json;
     <?php
     $data = [];
     if(!$model->isNewRecord){
-        $model->activity = explode(';', $model->activity);
-        $data = backend\models\Activity::getListActivitiesOfService($model->id_service);
+        if(!empty($model->activity)){
+            $model->activity = explode(';', $model->activity);
+            $data = backend\models\Activity::getListActivitiesOfService($model->id_service);
+        }
     }
     
     echo $form->field($model, 'activity')->widget(Select2::classname(), [
