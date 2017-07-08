@@ -192,7 +192,7 @@ class QuoteController extends Controller
         $mpdf->WriteHTML($content);
         $mpdf->WriteHTML($conditionsQuote);
 
-        $name = 'XXX-' . $model->id .'-'.$time;
+        $name = 'Cotización-' . $model->id .'-'.date("d-m-Y",$time);
         
         echo $mpdf->Output($folder . $name . '.pdf', "I");
         exit;
