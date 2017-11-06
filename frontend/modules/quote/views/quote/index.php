@@ -10,6 +10,9 @@ QuoteAsset::register($this);
 $this->title = Yii::t('app', 'Quotes');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php echo $this->render('_calculator'); ?>
+
 <div class="quote-index ">
 
     <h1><?= Html::encode($this->title) ?></h1>

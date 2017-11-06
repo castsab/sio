@@ -13,6 +13,8 @@ use backend\models\QuoteServiceSearch;
 use kartik\mpdf\Pdf;
 use mPDF;
 
+use backend\models\JHelper;
+
 /**
  * QuoteController implements the CRUD actions for Quote model.
  */
@@ -231,5 +233,20 @@ class QuoteController extends Controller
         
         echo $mpdf->Output($folder . $name . '.pdf', "I");
         exit;
+    }
+    
+    public function actionCalculateWorkingHours()
+    {
+        $jHelper = new JHelper();
+        Yii::$app->response->format = 'json';
+        $arrayData = Yii::$app->request->post();
+        $valueWorkingHours = ((Yii::$app->params['VBMA'] * 5) * 12 / 2000);
+        $value = ($arrayData['estimate_hours'] * $valueWorkingHours);
+        return [
+            'state' => 1, 
+            'calculateEstimate' => $jHelper::getValueFormat($value), 
+            'workingHours'=>$jHelper::getValueFormat($valueWorkingHours), 
+            'VBMA'=>$jHelper::getValueFormat(Yii::$app->params['VBMA'])
+        ];
     }
 }

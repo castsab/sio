@@ -7,6 +7,8 @@ use yii\widgets\Pjax;
 use frontend\assets\QuoteServiceAsset;
 QuoteServiceAsset::register($this);
 
+use backend\models\Service;
+
 ?>
 
 <div class="quote-service-index">
@@ -32,7 +34,15 @@ QuoteServiceAsset::register($this);
             //'id_quote',
             //'id_user',
             'id_service',
-            'activity',
+            [
+                'attribute'=>'id_service',
+                'label'=>Yii::t('app','Service'),
+                'format' => 'html',
+                'value' => function ($model) {
+                    return Service::getNameService($model->id_service);
+                },
+            ],
+            //'activity',
             'estimate_hours',
             
             [

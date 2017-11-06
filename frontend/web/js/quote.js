@@ -46,6 +46,26 @@ function actionAjaxSubmitFormQuote($form,idGridWiew) {
     });
 }
 
+$("#btnCalculateWorkingHours").click(function(){
+    $.ajax({
+        type: "post",
+        url: "/sio/frontend/web/quote/quote/calculate-working-hours",
+        dataType: 'json',
+        cache: false,
+        data: {estimate_hours:$("#estimate_hours").val()},
+        success: function(result) {
+            if (result.state == '1') {
+                $("#VBMA").html("$"+result.VBMA);
+                $("#workingHours").html("$"+result.workingHours);
+                $("#calculateEstimate").html("$"+result.calculateEstimate);
+            } 
+        },
+        error: function() {
+            console.log("server error");
+        }
+    });
+});
+
 
 
 

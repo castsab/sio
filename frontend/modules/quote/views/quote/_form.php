@@ -34,7 +34,7 @@ $this->registerJs("
 <div id="message-contact"></div>
 
 <div class="quote-form">
-
+    
     <?php $form = ActiveForm::begin(['id'=>'quote-form']); ?>
 
     <?php
