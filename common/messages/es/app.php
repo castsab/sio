@@ -54,5 +54,9 @@ return [
     'Services'=>'Servicios',
     'Create Service'=>'Crear servicio',
     'Administrative Expenses'=>'Gastos administrativos',
-    'Quote Iva'=>'Cotización con IVA'
+    'Quote Iva'=>'Cotización con IVA',
+    'Value Basis Service'=>'Valor base del servicio',
+    'Service'=>'Servicio',
+    'Id Service'=>'Código del servicio',
+    'Estimate Hours'=>'Horas estimadas'
 ];

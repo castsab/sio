@@ -2,10 +2,12 @@
 
 namespace backend\models;
 
+use Yii;
+
 class JHelper {
     
     public function getValueQuoteWithIva($value) {
-        return ($value + ($value * 19 / 100));
+        return ($value + (($value * 19 / 100)));
     }
     
     public function getValueFormat($value){
@@ -17,7 +19,7 @@ class JHelper {
     }
     
     public function getIvaQuote($value){
-        return ($value * 19 / 100);
+        return (($value * 19) / 100);
     }
     
     public static function getDateFormat($timestamp){
@@ -29,7 +31,8 @@ class JHelper {
     }
     
     public function getQuoteDiscount($value,$discount=0){
-        return ($value * $discount / 100);
+        //echo '-->'.$value.'<---';
+        return (($value * $discount)/100);
     }
     
     public static function getValueTextStatus($status){
@@ -42,5 +45,22 @@ class JHelper {
     
     public static function getValueAdministrativeExpensesQuote($value,$administrativeExpenses=0){
         return ($value * $administrativeExpenses / 100);
+    }
+    
+    public function redondear($valor) {
+        $valor = intval($valor);
+        $n = round($valor, -2);
+        return $n < $valor ? $n + 100 : $n;
+    }
+    
+    public function getValueWorkingHours(){
+       return $this->redondear(((Yii::$app->params['VBMA'] * 5) * 12 / 2000)); 
+    }
+    
+    public function getValueBasisServiceMoreCommission($value){
+        $commission = (($value * Yii::$app->params['commission'])/100);
+        $administrative = (($value * Yii::$app->params['administrative'])/100);
+        $valueBasisService = ($value + $commission + $administrative);
+        return $valueBasisService;
     }
 }

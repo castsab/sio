@@ -240,7 +240,7 @@ class QuoteController extends Controller
         $jHelper = new JHelper();
         Yii::$app->response->format = 'json';
         $arrayData = Yii::$app->request->post();
-        $valueWorkingHours = ((Yii::$app->params['VBMA'] * 5) * 12 / 2000);
+        $valueWorkingHours = $jHelper->getValueWorkingHours();
         $value = ($arrayData['estimate_hours'] * $valueWorkingHours);
         return [
             'state' => 1, 

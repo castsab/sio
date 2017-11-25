@@ -46,10 +46,10 @@ class Client extends \yii\db\ActiveRecord
     { 
         return [
             [['type_document', 'document', 'type_client', 'city_origin','status'], 'required'],
-            [['type_document', 'document', 'id_user', 'type_client', 'status', 'created_at', 'updated_at', 'cell_phone', 'local_phone', 'extension', 'contact_project', 'contact_business'], 'integer'],
+            [['type_document', 'document', 'id_user', 'type_client', 'status', 'created_at', 'updated_at', 'local_phone', 'extension', 'contact_project', 'contact_business'], 'integer'],
             [['city_origin', 'fax', 'pbx'], 'string', 'max' => 50],
             [['name_company'], 'string', 'max' => 200],
-            [['address', 'web_site', 'first_name', 'last_name', 'office_address', 'email'], 'string', 'max' => 100],
+            [['address', 'web_site', 'first_name', 'last_name', 'office_address', 'email','cell_phone'], 'string', 'max' => 100],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
             ['type_client', 'validateFields'],
         ]; 

@@ -8,6 +8,7 @@ use frontend\assets\QuoteServiceAsset;
 QuoteServiceAsset::register($this);
 
 use backend\models\Service;
+use backend\models\JHelper;
 
 ?>
 
@@ -42,7 +43,15 @@ use backend\models\Service;
                     return Service::getNameService($model->id_service);
                 },
             ],
-            //'activity',
+            
+            [
+                'attribute'=>'value_basis_service',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return JHelper::getValueFormat($model->value_basis_service);
+                },
+            ],
+                        
             'estimate_hours',
             
             [

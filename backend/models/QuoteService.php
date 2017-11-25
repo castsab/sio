@@ -4,6 +4,7 @@ namespace backend\models;
 use backend\models\Quote;
 
 use Yii;
+use backend\models\JHelper;
 
 /**
  * This is the model class for table "quote_service".
@@ -104,7 +105,8 @@ class QuoteService extends \yii\db\ActiveRecord
     }
     
     public function getValueWorkingHour($id_quote){
+        $JHelper = new JHelper();
         $quote = Quote::find()->where(['id'=>$id_quote])->one();
-        return (($quote->vbma * 5) * 12 / 2000);
+        return $JHelper->redondear((($quote->vbma * 5) * 12 / 2000));
     }
 }

@@ -15,6 +15,7 @@ $totalBaseValueServices = 0;
 <div class="quotation-labels">
     <label>Cotización para:<span><?= Client::getNameClient($model->document) ?></span></label>
     <ul>
+        <li><?= $model->document ?></li>
         <li><?= $arrayClientData->address ?></li>
         <li><?= $arrayClientData->cell_phone ?></li>
         <li><?= $arrayClientData->name_company ?></li>
@@ -25,23 +26,28 @@ $totalBaseValueServices = 0;
 <table class="contents-table-quotation">
     <thead>
         <tr>
-            <th colspan="4">Página Web Ladyland</th>
+            <th colspan="4">Lista de servicios</th>
         </tr>
         <tr>
             <td>ID Servicio</td>
             <td>Servicios</td>
-            <td>Valor Base</td>
+            <td colspan="2">Valor Base</td>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($arrayServices as $services) { ?>
+        
+        <?php
+        $value_basis_service = $jHelper->getValueBasisServiceMoreCommission($services['value_basis_service']);
+        ?>
+        
             <tr>
                 <td><?= $services['id_service'] ?></td>
                 <td><?= $services['name'] ?></td>
-                <td><?= '$' . $jHelper->getValueFormat($services['value_basis_service']) ?></td>
+                <td><?= '$' . $jHelper->getValueFormat($value_basis_service) ?></td>
             </tr>
         <?php 
-            $totalBaseValueServices += $services['value_basis_service']; 
+            $totalBaseValueServices += $value_basis_service; 
         } 
         ?>
             
