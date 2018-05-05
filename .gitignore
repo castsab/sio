@@ -35,4 +35,4 @@ phpunit.phar
 /.vagrant
 
 /frontend/web/uploads
-#composer.lock
+composer.lock
